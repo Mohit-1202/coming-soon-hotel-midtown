@@ -17,28 +17,48 @@ const timer = setInterval(function() {
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     // Display the result in the corresponding elements
-    document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
-    document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
-    document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
-    document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    if (daysEl) daysEl.innerHTML = days < 10 ? "0" + days : days;
+    if (hoursEl) hoursEl.innerHTML = hours < 10 ? "0" + hours : hours;
+    if (minutesEl) minutesEl.innerHTML = minutes < 10 ? "0" + minutes : minutes;
+    if (secondsEl) secondsEl.innerHTML = seconds < 10 ? "0" + seconds : seconds;
 
     // If the countdown is finished, display a message
     if (distance < 0) {
         clearInterval(timer);
-        document.getElementById("days").innerHTML = "00";
-        document.getElementById("hours").innerHTML = "00";
-        document.getElementById("minutes").innerHTML = "00";
-        document.getElementById("seconds").innerHTML = "00";
-        document.querySelector(".launching-text").innerHTML = "WE HAVE ARRIVED!";
+        if (daysEl) daysEl.innerHTML = "00";
+        if (hoursEl) hoursEl.innerHTML = "00";
+        if (minutesEl) minutesEl.innerHTML = "00";
+        if (secondsEl) secondsEl.innerHTML = "00";
+        
+        const launchText = document.querySelector(".launching-text");
+        if (launchText) launchText.innerHTML = "WE HAVE ARRIVED!";
     }
 }, 1000);
 
-// Handle newsletter form submission
-document.querySelector(".subscribe-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const email = this.querySelector("input").value;
-    if (email) {
-        alert("Thank you for subscribing! We'll keep you updated.");
-        this.reset();
+// Modal Logic
+const modal = document.getElementById("enquiry-modal");
+const btn = document.getElementById("enquire-now-btn");
+const closeBtn = document.querySelector(".close-modal");
+
+if (btn && modal) {
+    btn.onclick = function() {
+        modal.style.display = "flex";
     }
-});
+}
+
+if (closeBtn && modal) {
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
