@@ -48,17 +48,31 @@ const closeBtn = document.querySelector(".close-modal");
 if (btn && modal) {
     btn.onclick = function() {
         modal.style.display = "flex";
+        // Small timeout to ensure display: flex is applied before adding active class for transition
+        setTimeout(() => {
+            modal.classList.add("active");
+        }, 10);
     }
 }
 
-if (closeBtn && modal) {
-    closeBtn.onclick = function() {
-        modal.style.display = "none";
+const hideModal = () => {
+    if (modal) {
+        modal.classList.remove("active");
+        // Wait for transition to finish before hiding
+        setTimeout(() => {
+            if (!modal.classList.contains("active")) {
+                modal.style.display = "none";
+            }
+        }, 400); // Matches transition duration
     }
+};
+
+if (closeBtn) {
+    closeBtn.onclick = hideModal;
 }
 
 window.onclick = function(event) {
     if (event.target == modal) {
-        modal.style.display = "none";
+        hideModal();
     }
 }
