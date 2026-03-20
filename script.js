@@ -1,8 +1,8 @@
 // Set the countdown date to March 19, 2026 00:00:00
-const countdownDate = new Date("March 19, 2026 00:00:00").getTime();
+const countdownDate = new Date("March 30, 2026 00:00:00").getTime();
 
 // Update the countdown every 1 second
-const timer = setInterval(function() {
+const timer = setInterval(function () {
 
     // Get today's date and time
     const now = new Date().getTime();
@@ -34,7 +34,7 @@ const timer = setInterval(function() {
         if (hoursEl) hoursEl.innerHTML = "00";
         if (minutesEl) minutesEl.innerHTML = "00";
         if (secondsEl) secondsEl.innerHTML = "00";
-        
+
         const launchText = document.querySelector(".launching-text");
         if (launchText) launchText.innerHTML = "WE HAVE ARRIVED!";
     }
